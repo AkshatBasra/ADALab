@@ -41,14 +41,23 @@ void dijkstra(int n, int graph[n][n], int start)
 int main()
 {
     int n = 5, start = 0;
-    int graph[5][5] =
+    int graph[n][n];
+    /*int graph[5][5] =
                      {
                          {0, 4, 3, 0, 0},
                          {2, 0, 6, 0, 3},
                          {0, 10, 0, 4, 0},
                          {0, 0, 3, 0, 1},
                          {0, 0, 2, 5, 0}
-                     };
+                     };*/
+
+    for(int i = 0; i < n; i++)
+    {
+        for(int j = 0; j < n; j++)
+        {
+            scanf("%d", &graph[i][j]);
+        }
+    }
     for(int i = 0; i < n; i++)
     {
         for(int j = 0; j < n; j++)

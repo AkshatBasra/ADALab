@@ -32,7 +32,8 @@ void prim(int n, int graph[n][n], int parent[n])
     }
 
     key[0] = 0;
-    for (int count = 0; count < n - 1; count++) {
+    for (int count = 0; count < n - 1; count++)
+    {
         int u = minKey(key, mstSet, n);
         mstSet[u] = 1;
 

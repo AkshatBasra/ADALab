@@ -4,7 +4,7 @@
 
 int minKey(int key[], int mstSet[], int n)
 {
-    int min = INT_MAX, minIndex;
+    int min = INT_MAX, minIndex = -1;
     for (int i = 0; i < n; i++)
         if (!mstSet[i] && key[i] < min)
         {
@@ -14,7 +14,7 @@ int minKey(int key[], int mstSet[], int n)
     return minIndex;
 }
 
-int printMST(int n, int parent[], int graph[n][n])
+void printMST(int n, int parent[], int graph[n][n])
 {
     printf("Edge \tWeight\n");
     for (int i = 1; i < n; i++)
@@ -28,10 +28,12 @@ void prim(int n, int graph[n][n], int parent[n])
     for (int i = 0; i < n; i++)
     {
         key[i] = INT_MAX;  //infinity
-        mstSet[i] = -1;
+        mstSet[i] = 0;     // Not included in MST
     }
 
     key[0] = 0;
+    parent[0] = -1; // First node is always root of MST
+
     for (int count = 0; count < n - 1; count++)
     {
         int u = minKey(key, mstSet, n);
@@ -41,7 +43,8 @@ void prim(int n, int graph[n][n], int parent[n])
         {
             if (graph[u][i] && !mstSet[i] && graph[u][i] < key[i])
             {
-                parent[i] = u, key[i] = graph[u][i];
+                parent[i] = u;
+                key[i] = graph[u][i];
             }
         }
     }
@@ -54,7 +57,7 @@ int main()
                         { 0, 3, 0, 0, 7 },
                         { 6, 8, 0, 0, 9 },
                         { 0, 5, 7, 9, 0 } };
-    int mst[5] = {-1};
+    int mst[5];
     clock_t start, end;
 
     start = clock();
@@ -62,6 +65,6 @@ int main()
     end = clock();
 
     printMST(5, mst, graph);
-    printf("Clock: %lf", (end - start)/CLK_TCK);
+    printf("Clock: %lf\n", (double)(end - start) / CLOCKS_PER_SEC);
     return 0;
 }
